@@ -1,0 +1,15 @@
+{
+    "name": "vpn-monorepo",
+    "version": "0.0.0",
+    "private": true,
+    "license": "MIT",
+    "scripts": {},
+    "devDependencies": {
+        "typescript": "^5.9.3"
+    },
+    "packageManager": "pnpm@10.15.0",
+    "engines": {
+        "node": ">=18",
+        "pnpm": ">=8"
+    }
+}
