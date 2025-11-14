@@ -1,0 +1,21 @@
+{
+    "name": "@packages/inversify-websocket",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "npx tsc"
+    },
+    "devDependencies": {
+        "@packages/tsconfig": "workspace:^"
+    },
+    "dependencies": {
+        "inversify": "^7.10.4",
+        "socket.io": "^4.8.1"
+    }
+}

@@ -2,6 +2,7 @@
     "files": [],
     "references": [
         { "path": "./packages/inversify-fastify" },
+        { "path": "./packages/inversify-websocket" }
     ],
     "compilerOptions": {
         "composite": true,
