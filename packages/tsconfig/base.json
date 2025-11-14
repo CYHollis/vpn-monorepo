@@ -1,0 +1,32 @@
+{
+    "$schema": "https://www.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "target": "es2022",
+        "lib": ["ES2022"],
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "allowJs": true,
+        "checkJs": false,
+        // 生成声明文件
+        "declaration": true,
+        // 声明文件 Sourcemap, 允许直接跳转到对应ts文件而非d.ts文件
+        "declarationMap": true,
+        // 生成 Sourcema, 允许调试时直接调试原始ts代码
+        "sourceMap": true,
+        "outDir": "./dist",
+        "removeComments": true,
+        // ES 模块互操作, 允许commonjs导出的包能正确被es模块import
+        "esModuleInterop": true,
+        // 强制区分大小写
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "skipLibCheck": true,
+        // 索引访问检查, 通过索引访问数组元素 (arr[index]) 或对象属性 (obj[key]) 时结果的类型与 undefined 联合
+        "noUncheckedIndexedAccess": true,
+        // 精确可选属性, 可选属性不允许直接传入undefined
+        "exactOptionalPropertyTypes": true,
+        // 包可以被其他包引用
+        "composite": true
+    }
+}
