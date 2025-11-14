@@ -1,0 +1,21 @@
+{
+    "name": "@packages/inversify-fastify",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "npx tsc"
+    },
+    "devDependencies": {
+        "@packages/tsconfig": "workspace:^"
+    },
+    "dependencies": {
+        "fastify": "^5.6.1",
+        "inversify": "^7.10.4"
+    }
+}
