@@ -1,0 +1,22 @@
+{
+    "name": "@packages/inversify-bullmq",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "npx tsc"
+    },
+    "devDependencies": {
+        "@packages/tsconfig": "workspace:^"
+    },
+    "dependencies": {
+        "bullmq": "^5.63.0",
+        "inversify": "^7.10.4",
+        "ioredis": "^5.8.2"
+    }
+}

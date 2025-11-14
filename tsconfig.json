@@ -2,7 +2,9 @@
     "files": [],
     "references": [
         { "path": "./packages/inversify-fastify" },
-        { "path": "./packages/inversify-websocket" }
+        { "path": "./packages/inversify-websocket" },
+        { "path": "./packages/inversify-bullmq" }
+
     ],
     "compilerOptions": {
         "composite": true,
