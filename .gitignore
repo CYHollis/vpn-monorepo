@@ -5,3 +5,7 @@ node_modules/
 dist/
 .turbo/
 tsconfig.tsbuildinfo
+
+# IDE
+.vscode/**
+!.vscode/settings.json

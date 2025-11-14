@@ -5,15 +5,32 @@
     "license": "MIT",
     "scripts": {
         "build": "turbo run build",
-        "dev": "turbo run dev --parallel"
+        "dev": "turbo run dev --parallel",
+        "lint": "npx eslint .",
+        "prepare": "npx husky install"
     },
     "devDependencies": {
+        "@eslint/js": "^9.39.0",
+        "eslint": "^9.39.0",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-prettier": "^5.5.4",
+        "globals": "^16.5.0",
+        "husky": "^8.0.0",
+        "lint-staged": "^16.2.6",
+        "prettier": "^3.6.2",
         "turbo": "^2.6.0",
-        "typescript": "^5.9.3"
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.46.2"
     },
     "packageManager": "pnpm@10.15.0",
     "engines": {
         "node": ">=18",
         "pnpm": ">=8"
-    }
+    },
+    "lint-staged": {
+        "*.{js,ts,vue}": [
+          "eslint --fix",
+          "prettier --write"
+        ]
+  	}
 }
