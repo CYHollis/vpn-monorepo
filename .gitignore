@@ -1,2 +1,7 @@
 # 依赖目录
 node_modules/
+
+# 生产构建
+dist/
+.turbo/
+tsconfig.tsbuildinfo
