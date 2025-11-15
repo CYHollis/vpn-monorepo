@@ -1,6 +1,6 @@
-import { InversifyBullmqTask } from './core/tasks/index'
+import { InversifyBullmqTask } from './task/index.js'
 
-import { job } from './core/decorators/job'
-import { queue } from './core/decorators/queue'
+import { job } from './decorators/job.js'
+import { queue } from './decorators/queue.js'
 
 export { InversifyBullmqTask, job, queue }

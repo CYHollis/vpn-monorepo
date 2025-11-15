@@ -1,31 +1,94 @@
 import { RedisClient, MysqlClient } from '@packages/database'
-const a = new RedisClient({
-    port: 6379,
-    host: 'localhost',
-    db: 1
-})
+import {
+    controller,
+    Get,
+    Header,
+    InversifyFastifyServer
+} from '@packages/inversify-fastify'
+import {
+    InversifyWebSocketServer,
+    message,
+    param,
+    socket
+} from '@packages/inversify-websocket'
+import { InversifyBullmqTask, job, queue } from '@packages/inversify-bullmq'
+import { Container } from 'inversify'
 
-const b = new MysqlClient({
-    user: 'root',
-    password: '124638feq.',
-    database: 'vpn_service'
-})
+async function DataBaseTest() {
+    const redis = new RedisClient({
+        port: 6379,
+        host: 'localhost',
+        db: 1
+    })
+    const res1 = await redis.set('test3', '2')
+    console.log('redis: ', res1)
 
-async function Test() {
-    // const res = await a.set('test3', '2')
-    // console.log(res)
-    const res = await b.execute(
+    const mysql = new MysqlClient({
+        user: 'root',
+        password: '124638feq.',
+        database: 'vpn_service'
+    })
+    const res2 = await mysql.execute(
         'UPDATE users SET username = ? WHERE uid = ?',
         'default21',
         1
     )
-    console.log(res)
+    console.log('mysql: ', res2)
 }
 
-Test()
+DataBaseTest()
 
-// import { InversifyFastifyServer } from '@packages/inversify-fastify'
-// import { Container } from 'inversify'
+const container = new Container()
 
-// const container = new Container()
-// const app = new InversifyFastifyServer(container)
+let fastifyApp: InversifyFastifyServer
+async function InversifyFastifyTest() {
+    fastifyApp = new InversifyFastifyServer(container)
+    fastifyApp.listen({ port: 3000 }, () => {
+        console.log('Fastify server is running')
+    })
+}
+
+@controller('/test')
+class TestController {
+    @Get('/hello')
+    public async hello(@Header('auth') type: string) {
+        console.log(type)
+        return 'hello'
+    }
+}
+container.bind(TestController).toSelf().inRequestScope()
+
+InversifyFastifyTest()
+
+async function InversifyWebsocketTest() {
+    const app = new InversifyWebSocketServer(container)
+    app.listen(fastifyApp.build())
+}
+
+@socket()
+class SocketController {
+    @message('/hello')
+    public async hello(uid: string) {
+        console.log(uid)
+    }
+}
+container.bind(SocketController).toSelf().inRequestScope()
+
+InversifyWebsocketTest()
+
+async function InversifyBullmqTest() {
+    const app = new InversifyBullmqTask(container)
+    app.listen(new RedisClient().getConnection())
+}
+
+@queue('wg')
+class BullmqController {
+    @job('collect', { repeat: { every: 5000 } })
+    public async collect() {
+        console.log('bullmq')
+    }
+}
+
+container.bind(BullmqController).toSelf().inSingletonScope()
+
+InversifyBullmqTest()

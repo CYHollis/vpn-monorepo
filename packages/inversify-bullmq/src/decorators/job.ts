@@ -1,6 +1,7 @@
-import { MetadataRuntime } from '../../metadata'
+import { JobsOptions } from 'bullmq'
+import { MetadataRuntime } from '../metadata/index.js'
 
-export function Put(path: string) {
+export function job(jobName: string, jobOptions?: JobsOptions) {
     return function (
         target: any,
         propertyKey: string,
@@ -9,8 +10,8 @@ export function Put(path: string) {
         MetadataRuntime.addProperty(
             target.constructor,
             propertyKey,
-            path,
-            'put'
+            jobName,
+            jobOptions || {}
         )
     }
 }

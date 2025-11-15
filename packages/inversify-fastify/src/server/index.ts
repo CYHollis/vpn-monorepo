@@ -1,7 +1,9 @@
 import fastify, { FastifyReply, FastifyRequest } from 'fastify'
 import { FastifyInstance } from 'fastify'
 import { Container } from 'inversify'
-import { MetadataRuntime } from '../metadata'
+import { MetadataRuntime } from '../metadata/index.js'
+import { FrameworkError } from '../errors/framework.error.js'
+import { ContainerError } from '../errors/container.error.js'
 
 export class InversifyFastifyServer {
     private server: FastifyInstance
@@ -13,11 +15,12 @@ export class InversifyFastifyServer {
     }
 
     public async listen(
-        opts: { port: number; host: string },
+        opts: { port?: number; host?: string },
         handler: () => void
     ) {
         try {
             this.parseMetadata()
+            this.setErrorHandler(() => {})
             await this.server.listen(opts)
             handler()
         } catch (err) {
@@ -27,7 +30,24 @@ export class InversifyFastifyServer {
     }
 
     public build() {
-        return this.server
+        return this.server.server
+    }
+
+    public setErrorHandler(
+        handler: (
+            error: unknown,
+            request: FastifyRequest,
+            reply: FastifyReply
+        ) => void
+    ) {
+        this.server.setErrorHandler((error, request, reply) => {
+            // 处理框架中的严重错误
+            if (error instanceof FrameworkError) {
+                console.log(error)
+                process.exit(1)
+            }
+            handler(error, request, reply)
+        })
     }
 
     private parseMetadata() {
@@ -38,6 +58,9 @@ export class InversifyFastifyServer {
                 path: constructorPath,
                 properties
             } = MetadataRuntime.metadata[constructorName]
+
+            // 将类交给IOC容器管理
+            // this.container.bind(target as Function).toSelf()
 
             // 遍历所有方法
             for (const propertyKey in properties) {
@@ -61,8 +84,15 @@ export class InversifyFastifyServer {
                             }
                             result.push((request[location] as any)[name])
                         }
-                        const instance: any = this.container.get(target as any)
-                        return instance[propertyKey](...result)
+                        // 获取容器对象错误处理
+                        try {
+                            const instance: any = this.container.get(
+                                target as any
+                            )
+                            return instance[propertyKey](...result)
+                        } catch (error: any) {
+                            throw new ContainerError(error.message)
+                        }
                     }
                 )
             }

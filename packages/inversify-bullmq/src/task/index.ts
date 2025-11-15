@@ -1,5 +1,5 @@
 import { Job, Queue, Worker } from 'bullmq'
-import { MetadataRuntime } from '../metadata'
+import { MetadataRuntime } from '../metadata/index.js'
 import { Redis } from 'ioredis'
 import { Container } from 'inversify'
 
@@ -33,19 +33,31 @@ export class InversifyBullmqTask {
             })
             this.queues.push(queue)
 
+            // 添加队列任务
+            for (const propertyKey in properties) {
+                const { jobOptions, jobName } = properties[propertyKey]
+                queue.add(jobName, {}, jobOptions)
+            }
+
             // 动态创建Worker
             const worker = new Worker(
                 queueName,
                 async (job: Job) => {
-                    // 遍历所有方法
+                    // 遍历所有方法查找任务处理函数
                     for (const propertyKey in properties) {
                         const { jobName } = properties[propertyKey]
+
                         // 执行任务
                         if (jobName === job.name) {
-                            const instance: any = this.container.get(
-                                target as Function
-                            )
-                            instance[propertyKey]()
+                            try {
+                                const instance: any = this.container.get(
+                                    target as Function
+                                )
+                                instance[propertyKey]()
+                            } catch (error) {
+                                console.log(error)
+                                process.exit(1)
+                            }
                         }
                     }
                 },

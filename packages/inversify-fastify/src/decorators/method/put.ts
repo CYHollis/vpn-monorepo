@@ -1,6 +1,6 @@
-import { MetadataRuntime } from '../../metadata'
+import { MetadataRuntime } from '../../metadata/index.js'
 
-export function Get(path: string) {
+export function Put(path: string) {
     return function (
         target: any,
         propertyKey: string,
@@ -10,7 +10,7 @@ export function Get(path: string) {
             target.constructor,
             propertyKey,
             path,
-            'get'
+            'put'
         )
     }
 }

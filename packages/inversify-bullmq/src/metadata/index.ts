@@ -1,3 +1,5 @@
+import { JobsOptions } from 'bullmq'
+
 export interface Metadata {
     [constructorName: string]: {
         target: Function | null
@@ -6,6 +8,7 @@ export interface Metadata {
             [propertyKey: string]: {
                 target: Function | null
                 jobName: string
+                jobOptions: JobsOptions
             }
         }
     }
@@ -23,12 +26,15 @@ export class MetadataRuntime {
                 properties: {}
             }
         }
+        // 存在这个类, 更改队列名
+        this.metadata[constructor.name].queueName = queueName
     }
 
     public static addProperty(
         constructor: Function,
         propertyKey: string,
-        jobName: string
+        jobName: string,
+        jobOptions: JobsOptions
     ) {
         // 如果不存在这个类, 先添加类
         if (!this.metadata[constructor.name]) {
@@ -38,7 +44,8 @@ export class MetadataRuntime {
         if (!this.metadata[constructor.name].properties[propertyKey]) {
             this.metadata[constructor.name].properties[propertyKey] = {
                 target: null,
-                jobName
+                jobName,
+                jobOptions
             }
         }
     }

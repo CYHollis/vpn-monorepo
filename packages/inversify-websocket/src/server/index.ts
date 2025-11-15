@@ -32,7 +32,7 @@ export class InversifyWebSocketServer {
             for (const propertyKey in properties) {
                 const { ev, parameters } = properties[propertyKey]
 
-                // 如果ev未空, 即未使用message装饰器, 直接退出
+                // 如果ev为空, 即未使用message装饰器, 直接退出
                 if (!ev) {
                     continue
                 }
@@ -56,8 +56,15 @@ export class InversifyWebSocketServer {
                     }
 
                     // 传入参数执行方法
-                    const instance: any = this.container.get(target as Function)
-                    instance[propertyKey](...result)
+                    try {
+                        const instance: any = this.container.get(
+                            target as Function
+                        )
+                        instance[propertyKey](...result)
+                    } catch (error) {
+                        console.log(error)
+                        process.exit(1)
+                    }
                 })
             }
         }

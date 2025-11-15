@@ -5,7 +5,7 @@
     "license": "MIT",
     "scripts": {
         "build": "turbo run build",
-        "dev": "turbo run dev --parallel",
+        "start": "turbo run start --log-prefix=none",
         "lint": "npx eslint .",
         "prepare": "npx husky install"
     },

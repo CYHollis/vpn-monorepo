@@ -1,4 +1,4 @@
-import { MetadataRuntime } from '../../metadata'
+import { MetadataRuntime } from '../../metadata/index.js'
 
 export function Delete(path: string) {
     return function (

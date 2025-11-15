@@ -1,4 +1,4 @@
-import { MetadataRuntime } from '../../metadata'
+import { MetadataRuntime } from '../../metadata/index.js'
 
 export function controller(path?: string) {
     return function (constructor: Function) {

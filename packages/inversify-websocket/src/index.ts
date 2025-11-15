@@ -1,7 +1,7 @@
-import { socket } from './core/decorators/socket.js'
-import { message } from './core/decorators/message.js'
-import { param } from './core/decorators/param.js'
+import { socket } from './decorators/socket.js'
+import { message } from './decorators/message.js'
+import { param } from './decorators/param.js'
 
-import { InversifyWebSocketServer } from './core/server/index.js'
+import { InversifyWebSocketServer } from './server/index.js'
 
 export { socket, message, param, InversifyWebSocketServer }

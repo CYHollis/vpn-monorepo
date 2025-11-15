@@ -1,4 +1,4 @@
-import { MetadataRuntime } from '../metadata'
+import { MetadataRuntime } from '../metadata/index.js'
 
 export function queue(queueName: string) {
     return function (constructor: Function) {

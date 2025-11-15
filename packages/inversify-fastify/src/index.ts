@@ -1,15 +1,15 @@
-import { InversifyFastifyServer } from './core/server/index'
+import { InversifyFastifyServer } from './server/index.js'
 
-import { controller } from './core/decorators/class/controller'
+import { controller } from './decorators/class/controller.js'
 
-import { Get } from './core/decorators/method/get'
-import { Post } from './core/decorators/method/post'
-import { Put } from './core/decorators/method/put'
-import { Delete } from './core/decorators/method/delete'
+import { Get } from './decorators/method/get.js'
+import { Post } from './decorators/method/post.js'
+import { Put } from './decorators/method/put.js'
+import { Delete } from './decorators/method/delete.js'
 
-import { Header } from './core/decorators/param/header'
-import { Body } from './core/decorators/param/body'
-import { Param } from './core/decorators/param/param'
+import { Header } from './decorators/param/header.js'
+import { Body } from './decorators/param/body.js'
+import { Param } from './decorators/param/param.js'
 
 export {
     InversifyFastifyServer,

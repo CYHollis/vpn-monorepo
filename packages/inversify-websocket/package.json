@@ -14,7 +14,7 @@
     "devDependencies": {
         "@packages/tsconfig": "workspace:^"
     },
-    "dependencies": {
+    "peerDependencies": {
         "inversify": "^7.10.4",
         "socket.io": "^4.8.1"
     }
