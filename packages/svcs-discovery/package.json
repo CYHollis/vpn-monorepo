@@ -1,0 +1,20 @@
+{
+    "name": "@pkgs/svcs-discovery",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "npx tsc"
+    },
+    "devDependencies": {
+        "@pkgs/tsconfig": "workspace:^"
+    },
+    "peerDependencies": {
+        "nacos": "^2.6.0"
+    }
+}

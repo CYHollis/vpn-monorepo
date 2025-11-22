@@ -1,4 +1,5 @@
 import fastify, { FastifyReply, FastifyRequest } from 'fastify'
+import fastifyCookie from '@fastify/cookie'
 import { FastifyInstance } from 'fastify'
 import { Container } from 'inversify'
 import { MetadataRuntime } from '../metadata/index.js'
@@ -12,6 +13,9 @@ export class InversifyFastifyServer {
     constructor(container: Container) {
         this.container = container
         this.server = fastify()
+        this.server.register(fastifyCookie, {
+            secret: 'fastify-inversify'
+        })
     }
 
     public async listen(

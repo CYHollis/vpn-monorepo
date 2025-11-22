@@ -1,10 +1,11 @@
 {
     "files": [],
     "references": [
-        { "path": "./packages/inversify-fastify" },
-        { "path": "./packages/inversify-websocket" },
-        { "path": "./packages/inversify-bullmq" },
-        { "path": "./packages/database" }
+        { "path": "./pkgs/inversify-fastify" },
+        { "path": "./pkgs/inversify-websocket" },
+        { "path": "./pkgs/inversify-bullmq" },
+        { "path": "./pkgs/database" },
+        { "path": "./pkgs/service-discovery" }
     ],
     "compilerOptions": {
         "composite": true,

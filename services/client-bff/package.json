@@ -1,0 +1,25 @@
+{
+    "name": "@svcs/client-bff",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "npx tsc",
+        "start": "node dist/index.js"
+    },
+    "devDependencies": {
+        "@pkgs/tsconfig": "workspace:^"
+    },
+    "dependencies": {
+        "@pkgs/svcs-discovery": "workspace:^",
+        "@pkgs/fastify-inversify": "workspace:^",
+        "axios": "^1.13.2",
+        "fastify": "^5.6.2",
+        "inversify": "^7.10.4"
+    }
+}

@@ -1,5 +1,5 @@
 {
-    "name": "@packages/inversify-websocket",
+    "name": "@pkgs/bullmq-inversify",
     "version": "1.0.0",
     "private": true,
     "type": "module",
@@ -12,10 +12,11 @@
         "build": "npx tsc"
     },
     "devDependencies": {
-        "@packages/tsconfig": "workspace:^"
+        "@pkgs/tsconfig": "workspace:^"
     },
     "peerDependencies": {
+        "bullmq": "^5.63.0",
         "inversify": "^7.10.4",
-        "socket.io": "^4.8.1"
+        "ioredis": "^5.8.2"
     }
 }

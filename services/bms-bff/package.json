@@ -1,5 +1,5 @@
 {
-    "name": "@services/tests",
+    "name": "@svcs/bms-bff",
     "version": "1.0.0",
     "private": true,
     "type": "module",
@@ -13,13 +13,11 @@
         "start": "node dist/index.js"
     },
     "devDependencies": {
-        "@packages/tsconfig": "workspace:^"
+        "@pkgs/tsconfig": "workspace:^"
     },
     "dependencies": {
-        "@packages/database": "workspace:^",
-        "@packages/inversify-bullmq": "workspace:^",
-        "@packages/inversify-fastify": "workspace:^",
-        "@packages/inversify-websocket": "workspace:^",
-        "inversify": "^7.10.4"
+        "@pkgs/svcs-discovery": "workspace:^",
+        "axios": "^1.13.2",
+        "fastify": "^5.6.2"
     }
 }
